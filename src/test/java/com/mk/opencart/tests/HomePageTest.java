@@ -1,41 +1,31 @@
 package com.mk.opencart.tests;
 
-import com.microsoft.playwright.Page;
-import com.mk.opencart.factory.PlaywrightFactory;
-import com.mk.opencart.pages.HomePage;
+import com.mk.opencart.base.BaseTest;
+import com.mk.opencart.constants.AppConstants;
 import org.testng.Assert;
-import org.testng.AssertJUnit;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class HomePageTest {
+/*
+* @Author - Marikannan Mariappan
+* */
+public class HomePageTest extends BaseTest {
 
-    PlaywrightFactory pf;
-    Page page;
-    HomePage homePage;
-
-    @BeforeTest
-    public void setup()
-    {
-    pf = new PlaywrightFactory();
-    pf.initBrowser("chromium");
-    page = pf.loadPage("https://naveenautomationlabs.com/opencart/");
-    homePage = new HomePage(page);
-    }
+   // Properties prop;    - no need to create object instance again, Hence it;s declared as 'protected' in parent class
+    //PlaywrightFactory pf;
 
     @Test
     public void homePageTitleTest()
     {
        String actualTitle = homePage.getHomePageTitle();
-        Assert.assertEquals(actualTitle,"Your Store");
+        Assert.assertEquals(actualTitle, AppConstants.LOGIN_PAGE_TITLE);
     }
      @Test
     public void homePageURLTest()
     {
+
        String actualURL = homePage.getHomePageURL();
-       Assert.assertEquals(actualURL,"https://naveenautomationlabs.com/opencart/");
+       Assert.assertEquals(actualURL,prop.getProperty("url"));
     }
 
     @DataProvider
@@ -50,14 +40,10 @@ public class HomePageTest {
     }
 
     @Test(dataProvider = "getProductData",priority = 100)
-    public void SearchTest(String productName) throws InterruptedException {
+    public void SearchTest(String productName) {
        String actualHeaderTest = homePage.doSearch(productName);
        Assert.assertEquals(actualHeaderTest,"Search - "+productName);
     }
 
-    @AfterTest
-    public void tearDown()
-    {
-        page.context().browser().close();
-    }
+
 }
