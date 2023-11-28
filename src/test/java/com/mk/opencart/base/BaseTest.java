@@ -3,6 +3,7 @@ package com.mk.opencart.base;
 import com.microsoft.playwright.Page;
 import com.mk.opencart.factory.PlaywrightFactory;
 import com.mk.opencart.pages.HomePage;
+import com.mk.opencart.pages.LoginPage;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 
@@ -16,6 +17,7 @@ public class BaseTest {
     Page page;
     protected Properties prop;
     protected HomePage homePage;
+    protected LoginPage loginPage;
 
     @BeforeTest
     public void setup()
