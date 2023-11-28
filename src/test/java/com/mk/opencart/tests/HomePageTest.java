@@ -14,13 +14,13 @@ public class HomePageTest extends BaseTest {
    // Properties prop;    - no need to create object instance again, Hence it;s declared as 'protected' in parent class
     //PlaywrightFactory pf;
 
-    @Test
+    @Test(priority = 1)
     public void homePageTitleTest()
     {
        String actualTitle = homePage.getHomePageTitle();
-        Assert.assertEquals(actualTitle, AppConstants.LOGIN_PAGE_TITLE);
+        Assert.assertEquals(actualTitle, AppConstants.HOME_PAGE_TITLE);
     }
-     @Test
+     @Test(priority = 2)
     public void homePageURLTest()
     {
 
@@ -39,7 +39,7 @@ public class HomePageTest extends BaseTest {
         };
     }
 
-    @Test(dataProvider = "getProductData",priority = 100)
+    @Test(dataProvider = "getProductData",priority = 3)
     public void SearchTest(String productName) {
        String actualHeaderTest = homePage.doSearch(productName);
        Assert.assertEquals(actualHeaderTest,"Search - "+productName);
